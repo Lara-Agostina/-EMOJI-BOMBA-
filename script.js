@@ -110,31 +110,19 @@ function startNewRound() {
 }
 
 function startPlayerTurn(index) {
-    let turnsChecked = 0;
-    let nextIndex = index;
-    
-    // Encontrar el siguiente jugador activo (que no haya explotado)
-    while (players[nextIndex].isBoomed && turnsChecked < players.length) {
-        nextIndex = (nextIndex + 1) % players.length;
-        turnsChecked++;
+        // ... (código previo) ...
+
+        currentPlayerSpan.textContent = player.name;
+        emojiAnswerInput.value = '';
+        
+        // **Nueva Línea:** Usamos un pequeño retraso para asegurar el foco en móvil
+        setTimeout(() => {
+            emojiAnswerInput.focus();
+        }, 100); // 100 milisegundos de retraso
+        
+
+        startTimer();
     }
-    
-    const nonBoomedCount = players.filter(p => !p.isBoomed).length;
-    if (roundResponses.length >= nonBoomedCount) {
-         startVotingPhase();
-         return;
-    }
-
-    currentPlayerIndex = nextIndex;
-    const player = players[currentPlayerIndex];
-
-    currentPlayerSpan.textContent = player.name;
-    emojiAnswerInput.value = '';
-    emojiAnswerInput.focus();
-
-    startTimer();
-}
-
 // ----------------------------------------------------------------
 // 3. LÓGICA DEL TEMPORIZADOR Y LA BOMBA
 // ----------------------------------------------------------------
