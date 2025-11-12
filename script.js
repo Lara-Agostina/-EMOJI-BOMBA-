@@ -37,7 +37,11 @@ const boomPhaseDiv = document.getElementById('boomPhase');
 const boomMessageDiv = document.getElementById('boomMessage');
 const votingPhaseDiv = document.getElementById('votingPhase');
 const answersDiv = document.getElementById('answers');
-
+// ... (otras referencias DOM)
+const boomMessageDiv = document.getElementById('boomMessage');
+const nextPlayerButton = document.querySelector('#boomPhase .btn'); // <-- NUEVA LÍNEA
+const votingPhaseDiv = document.getElementById('votingPhase');
+// ...
 
 // ----------------------------------------------------------------
 // 2. FUNCIONES DE CONTROL DE PANTALLA Y JUEGO
@@ -158,6 +162,9 @@ function handleTimerEnd() {
     inputPhaseDiv.classList.add('hidden');
     boomPhaseDiv.classList.remove('hidden');
     
+    // 1. Ocultar el botón inmediatamente para el retraso
+    nextPlayerButton.classList.add('hidden'); 
+    
     const player = players[currentPlayerIndex];
     player.isBoomed = true;
     
@@ -169,17 +176,29 @@ function handleTimerEnd() {
         playerElement.style.color = 'white';
     }
     
+    // 2. Mostrar el botón "Siguiente" después de 2 segundos
+    setTimeout(() => {
+        nextPlayerButton.classList.remove('hidden'); 
+    }, 2000); // 2000 milisegundos = 2 segundos
+    
     const activePlayersCount = players.filter(p => !p.isBoomed).length;
     if (activePlayersCount <= 1) {
-         setTimeout(nextPlayerAfterBoom, 2000);
+    setTimeout(nextPlayerAfterBoom, 2000);
     }
 }
 
 // Listener para pasar la bomba (colocado al cargar el script)
-emojiAnswerInput.addEventListener('input', (event) => {
-    if (event.target.value.length >= 1) {
-        clearInterval(timerInterval);
-        passTheBomb(event.target.value);
+// NUEVO CÓDIGO: Pasa la bomba SOLO cuando el jugador presiona Enter
+emojiAnswerInput.addEventListener('keydown', (event) => {
+    // Código 13 es la tecla Enter
+    if (event.key === 'Enter' || event.keyCode === 13) {
+        event.preventDefault(); // Evita el salto de línea por defecto
+        
+        // Asegurarse de que haya al menos 1 carácter (o 1 emoji)
+        if (emojiAnswerInput.value.length >= 1) {
+            clearInterval(timerInterval);
+            passTheBomb(emojiAnswerInput.value);
+        }
     }
 });
 
