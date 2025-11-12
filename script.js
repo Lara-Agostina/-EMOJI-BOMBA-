@@ -38,9 +38,7 @@ const boomMessageDiv = document.getElementById('boomMessage');
 const votingPhaseDiv = document.getElementById('votingPhase');
 const answersDiv = document.getElementById('answers');
 // ... (otras referencias DOM)
-const boomMessageDiv = document.getElementById('boomMessage');
 const nextPlayerButton = document.querySelector('#boomPhase .btn'); // <-- NUEVA LÍNEA
-const votingPhaseDiv = document.getElementById('votingPhase');
 // ...
 
 // ----------------------------------------------------------------
@@ -162,6 +160,9 @@ function handleTimerEnd() {
     inputPhaseDiv.classList.add('hidden');
     boomPhaseDiv.classList.remove('hidden');
     
+    // ✅ NUEVO: Referenciamos el botón justo aquí.
+    const nextPlayerButton = document.querySelector('#boomPhase .btn'); 
+    
     // 1. Ocultar el botón inmediatamente para el retraso
     nextPlayerButton.classList.add('hidden'); 
     
@@ -170,11 +171,7 @@ function handleTimerEnd() {
     
     boomMessageDiv.innerHTML = `¡Oh no, **${player.name}** explotó! 💥<br>Su respuesta (si la hubo) no se cuenta.`;
     
-    const playerElement = document.getElementById(`player-${player.id}`);
-    if (playerElement) {
-        playerElement.style.backgroundColor = 'var(--boom)';
-        playerElement.style.color = 'white';
-    }
+    // ... (código para resaltar el jugador) ...
     
     // 2. Mostrar el botón "Siguiente" después de 2 segundos
     setTimeout(() => {
@@ -183,7 +180,7 @@ function handleTimerEnd() {
     
     const activePlayersCount = players.filter(p => !p.isBoomed).length;
     if (activePlayersCount <= 1) {
-    setTimeout(nextPlayerAfterBoom, 2000);
+        setTimeout(nextPlayerAfterBoom, 2000);
     }
 }
 
