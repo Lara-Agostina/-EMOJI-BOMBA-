@@ -113,12 +113,8 @@ function startPlayerTurn(index) {
     let turnsChecked = 0;
     let nextIndex = index;
     
-    // Encontrar el siguiente jugador activo (que no haya explotado)
-    while (players[nextIndex].isBoomed && turnsChecked < players.length) {
-        nextIndex = (nextIndex + 1) % players.length;
-        turnsChecked++;
-    }
-    
+    // ... (código para encontrar el siguiente jugador) ...
+
     const nonBoomedCount = players.filter(p => !p.isBoomed).length;
     if (roundResponses.length >= nonBoomedCount) {
         startVotingPhase();
@@ -132,10 +128,10 @@ function startPlayerTurn(index) {
     currentPlayerSpan.textContent = player.name;
     emojiAnswerInput.value = '';
 
-    // 2. Intentar enfocar el campo (Esto puede fallar en móvil, pero no detiene el juego)
-    emojiAnswerInput.focus();
+    // 🔥 ELIMINAR O COMENTAR la línea emojiAnswerInput.focus();
+    // emojiAnswerInput.focus(); 
 
-    // 3. Iniciar el temporizador al final
+    // 2. Iniciar el temporizador al final
     startTimer();
 }
 // ----------------------------------------------------------------
