@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>¡EMOJI BOMBA! 💣</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+
+    <h1>¡EMOJI BOMBA! 💣</h1>
+    <p class="subtitle">¡Ahora con explosiones reales y votación por estrellas!</p>
+
+    <div id="startScreen" class="card">
+        <h2>¿Cuántos jugadores?</h2>
+        <input type="number" id="playerCount" min="2" max="8" value="4" style="font-size:2.5rem;padding:15px;margin:20px;width:100px;border-radius:20px;border:3px solid var(--gold);"/>
+        <button class="btn" onclick="startGame()">¡EXPLOTAR JUNTOS!</button>
+    </div>
+
+    <div id="gameScreen" class="card hidden">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px 0;">
+            <div id="playerList"></div>
+        </div>
+        <div class="prompt" id="prompt"></div>
+        
+        <div id="inputPhase">
+            <p style="font-size:1.4rem;"><span id="currentPlayer"></span>, ¡10 segundos!</p>
+            <input type="text" class="emoji-input" id="emojiAnswer" placeholder="🦄💍😱" inputmode="none"/>
+            <div class="timer" id="timer">10</div>
+        </div>
+
+        <div id="boomPhase" class="hidden">
+            <div class="boom">KABOOM!</div>
+            <p id="boomMessage" style="font-size:2rem;"></p>
+            <button class="btn" onclick="nextPlayerAfterBoom()">Siguiente →</button>
+        </div>
+
+        <div id="votingPhase" class="hidden">
+            <h2>¡VOTEN LA MEJOR RESPUESTA!</h2>
+            <div id="answers"></div>
+            <p style="margin:20px;font-size:1.2rem;">Toca las estrellas para votar</p>
+            <button class="btn" onclick="endRound()">¡Finalizar ronda!</button>
+        </div>
+    </div>
+
+    <div id="endScreen" class="card hidden">
+        </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

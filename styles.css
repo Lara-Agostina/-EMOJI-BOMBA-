@@ -1,0 +1,146 @@
+:root {
+    --bg: #ff6b6b;
+    --accent: #feca57;
+    --text: #2d3436;
+    --boom: #ff3838;
+    --gold: #ffd700;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Comic Sans MS', cursive, sans-serif; 
+}
+
+body {
+    background: linear-gradient(135deg, #ff9ff3, #feca57, #48dbfb);
+    background-size: 300% 300%;
+    animation: gradient 8s ease infinite;
+    color: var(--text);
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+@keyframes gradient { 
+    0%{background-position:0% 50%} 
+    50%{background-position:100% 50%} 
+    100%{background-position:0% 50%} 
+}
+
+h1 { 
+    font-size: 2.8rem; 
+    margin-bottom: 10px; 
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.2); 
+}
+
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 25px;
+    margin: 15px auto;
+    max-width: 500px; /* Tamaño máximo más razonable */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.prompt { 
+    font-size: 1.9rem; 
+    font-weight: bold; 
+    margin: 25px 0; 
+    color: #e17055; 
+    min-height: 70px; 
+}
+
+.emoji-input {
+    font-size: 3.5rem;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    border: 4px dashed #ddd;
+    border-radius: 20px;
+    background: #f8f9fa;
+}
+
+.emoji-input:focus { 
+    outline: none; 
+    border-color: var(--gold); 
+    background: #fffbe6; 
+}
+
+.btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    font-size: 1.6rem;
+    border-radius: 50px;
+    margin: 15px 8px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: all 0.2s;
+}
+
+.btn:active { 
+    transform: scale(0.93); 
+}
+
+.timer { 
+    font-size: 4rem; 
+    font-weight: bold; 
+    color: var(--boom); 
+    margin: 20px 0; 
+}
+
+.boom { 
+    font-size: 6rem; 
+    animation: explode 0.8s ease-out; 
+}
+
+@keyframes explode {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.8); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.hidden { 
+    display: none; 
+}
+
+.stars { 
+    font-size: 2.5rem; 
+    cursor: pointer; 
+    user-select: none; 
+}
+
+.stars span:hover { 
+    transform: scale(1.1); /* Hice el hover un poco más sutil */
+}
+
+.selected { 
+    color: var(--gold) !important; 
+    text-shadow: 0 0 10px gold; 
+}
+
+.player-score { 
+    background: #fff; 
+    padding: 12px 18px; 
+    border-radius: 20px; 
+    margin: 8px; 
+    font-weight: bold; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+    transition: all 0.3s ease;
+}
+
+.winner { 
+    animation: pulse 1s infinite; 
+    background: linear-gradient(45deg, var(--gold), #ffd700, var(--gold)) !important; 
+    color: black !important; 
+}
+
+@keyframes pulse { 
+    0% { transform: scale(1); } 
+    50% { transform: scale(1.05); } 
+    100% { transform: scale(1); } 
+}
