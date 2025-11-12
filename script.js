@@ -110,19 +110,34 @@ function startNewRound() {
 }
 
 function startPlayerTurn(index) {
-        // ... (código previo) ...
-
-        currentPlayerSpan.textContent = player.name;
-        emojiAnswerInput.value = '';
-        
-        // **Nueva Línea:** Usamos un pequeño retraso para asegurar el foco en móvil
-        setTimeout(() => {
-            emojiAnswerInput.focus();
-        }, 100); // 100 milisegundos de retraso
-        
-
-        startTimer();
+    let turnsChecked = 0;
+    let nextIndex = index;
+    
+    // Encontrar el siguiente jugador activo (que no haya explotado)
+    while (players[nextIndex].isBoomed && turnsChecked < players.length) {
+        nextIndex = (nextIndex + 1) % players.length;
+        turnsChecked++;
     }
+    
+    const nonBoomedCount = players.filter(p => !p.isBoomed).length;
+    if (roundResponses.length >= nonBoomedCount) {
+        startVotingPhase();
+        return;
+    }
+
+    currentPlayerIndex = nextIndex;
+    const player = players[currentPlayerIndex];
+
+    // 1. Limpiar y mostrar el jugador
+    currentPlayerSpan.textContent = player.name;
+    emojiAnswerInput.value = '';
+
+    // 2. Intentar enfocar el campo (Esto puede fallar en móvil, pero no detiene el juego)
+    emojiAnswerInput.focus();
+
+    // 3. Iniciar el temporizador al final
+    startTimer();
+}
 // ----------------------------------------------------------------
 // 3. LÓGICA DEL TEMPORIZADOR Y LA BOMBA
 // ----------------------------------------------------------------
